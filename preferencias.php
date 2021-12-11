@@ -31,17 +31,21 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     </head>
     <body>
-	<form action="preferencias.php" method="POST">
-	    <label for="minijuegos">Selecciona tus preferencias:</label>
-	    <?php
+	<main>
+	    <form action="preferencias.php" method="POST">
+		<h1>PREFERENCIAS</h1>
+		<?php
 
-	        while($fila = $operaciones->extraerFila()){
-		    echo '<input id="'.$fila['idMinijuego'].'" type="checkbox" name="minijuegos[]" value="'.$fila['idMinijuego'].'" />';
-		    echo '<label for="'.$fila['idMinijuego'].'">'.$fila['nombre'].'</label>';
-		}
+		    while($fila = $operaciones->extraerFila()){
+			echo '<div>';
+			echo '<input id="'.$fila['idMinijuego'].'" type="checkbox" name="minijuegos[]" value="'.$fila['idMinijuego'].'" />';
+			echo '<label for="'.$fila['idMinijuego'].'"> '.$fila['nombre'].'</label>';
+			echo '</div>';
+		    }
 
-	    ?>
-	    <input type="submit" name="enviar" value="ENVIAR" />
-	</form>
+		?>
+		<input type="submit" name="enviar" value="ENVIAR" />
+	    </form>
+	</main>
     </body>
 </html>

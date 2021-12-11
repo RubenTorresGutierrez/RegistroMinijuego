@@ -9,7 +9,7 @@ USE RegistroMinijuego;
 -- TABLAS
 -- Tabla usuario
 CREATE TABLE usuario(
-    idUsario smallint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idUsuario smallint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre varchar(15) NOT NULL,
     apellidos varchar(30) NOT NULL,
     nombreUsuario varchar(15) NOT NULL,
@@ -26,9 +26,9 @@ CREATE TABLE miniJuego(
 
 -- Tabla Preferencia
 CREATE TABLE preferencia(
-    idUsario smallint UNSIGNED NOT NULL,
+    idUsuario smallint UNSIGNED NOT NULL,
     idMinijuego tinyint UNSIGNED NOT NULL,
-    CONSTRAINT FK_idUsuario FOREIGN KEY (idUsario) REFERENCES usuario(idUsario),
+    CONSTRAINT FK_idUsuario FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario),
     CONSTRAINT FK_idMinijuego FOREIGN KEY (idMinijuego) REFERENCES miniJuego(idMinijuego),
-    CONSTRAINT PK_preferencia PRIMARY KEY (idUsario, idMinijuego)
+    CONSTRAINT PK_preferencia PRIMARY KEY (idUsuario, idMinijuego)
 );

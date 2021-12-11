@@ -26,7 +26,7 @@
 
         function extraerFila(){
 
-            return $this->resultado->fetch_array(MYSQLI_ASSOC);
+            return $this->resultado->fetch_assoc();
 
         }
 
@@ -38,7 +38,7 @@
 
         function filasAfectadas(){
 
-
+	    return $this->resultado->affected_rows;
             
         }
 

@@ -36,7 +36,7 @@
 		<h1>PREFERENCIAS</h1>
 		<?php
 
-		    while($fila = $operaciones->extraerFila()){
+		    foreach($datos as $fila){
 			echo '<div>';
 			echo '<input id="'.$fila['idMinijuego'].'" type="checkbox" name="minijuegos[]" value="'.$fila['idMinijuego'].'" />';
 			echo '<label for="'.$fila['idMinijuego'].'"> '.$fila['nombre'].'</label>';

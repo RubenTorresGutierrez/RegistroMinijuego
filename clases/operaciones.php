@@ -60,10 +60,19 @@
 	    $sql = 'SELECT idMinijuego, nombre FROM miniJuego';
 
 	    //Realizar consulta
-	    $resultado = $this->bd->consultar($sql);
+	    $this->bd->consultar($sql);
+
+	    //Añadir el resultado de la consulta a un array
+	    $datos = array();
+	    while($fila = $this->bd->extraerFila()){
+		array_push($datos, $fila);
+	    }
 
 	    //Cerrar conexión
 	    $this->bd->cerrarConexion();
+
+	    //Devolver los datos
+	    return $datos;
 
 	}
 
@@ -104,12 +113,6 @@
 		    echo 'Ha ocurrido un error inesperado';
 	   	    break;
 	   } 
-
-	}
-
-	function extraerFila(){
-
-	    return $this->bd->extraerFila();
 
 	}
 

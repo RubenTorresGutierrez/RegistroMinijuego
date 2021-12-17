@@ -55,7 +55,6 @@
 		?>
 		<!-- ENVIAR -->
 		<input type="submit" name="enviar" value="ENVIAR" />
-		<p>¿Ya tienes cuenta? <a href="inicio.php">Iniciar sesión</a>.</p>
 	    </form>
 	</main>
     </body>

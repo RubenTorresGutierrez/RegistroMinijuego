@@ -1,10 +1,5 @@
 <?php
 
-    //Comprobar si hay una sesión activa
-    session_start();
-    if(!isset($_SESSION['id']))
-	header('Location:index.php');
-
     //IMPORTACIONES
     require_once 'clases/operaciones.php';
 
@@ -12,9 +7,8 @@
     $operaciones = new Operaciones();
 
     if(isset($_POST['enviar']))
-	if(!empty($_POST['minijuegos']))
-	    $operaciones->enviarPreferencias($_POST, $_SESSION['id']);
-    $datos = $operaciones->recibirPreferencias();
+	if(!empty($_POST['correo']) && !empty($_POST['password']))
+	    $operaciones->iniciarSesion($_POST);
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +18,7 @@
         <meta name="author" content="rtorresgutierrez.guadalupe@alumnado.fundacionloyola.net" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Preferencias</title>
+        <title>Iniciar Sesión</title>
         <!-- CSS -->
         <link rel=stylesheet href=css/style.css />
         <!-- ICONOS -->
@@ -32,19 +26,15 @@
     </head>
     <body>
 	<main>
-	    <form action="preferencias.php" method="POST">
-		<h1>PREFERENCIAS</h1>
-		<?php
-
-		    foreach($datos as $fila){
-			echo '<div>';
-			echo '<input id="'.$fila['idMinijuego'].'" type="checkbox" name="minijuegos[]" value="'.$fila['idMinijuego'].'" />';
-			echo '<label for="'.$fila['idMinijuego'].'"> '.$fila['nombre'].'</label>';
-			echo '</div>';
-		    }
-
-		?>
-		<input type="submit" name="enviar" value="ENVIAR" />
+	    <form action="index.php" method="POST">
+		<h1>INICIAR SESIÓN</h1>
+		<!-- CORREO -->
+		<input type="email" name="correo" placeholder="Correo" />
+		<!-- CONTRASEÑA -->
+		<input type="password" name="password" placeholder="Contraseña" />
+		<!-- ENVIAR -->
+		<input type="submit" name="enviar" value="INICIAR" />
+		<p>¿No tienes cuenta? <a href="registro.php">Registrarse</a>.</p>
 	    </form>
 	</main>
     </body>

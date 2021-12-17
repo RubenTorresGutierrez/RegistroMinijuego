@@ -42,15 +42,36 @@
 	    //Obtener el id
 	    $id = $this->bd->extraerFila();
 
-	    //Cerrar conexión
-	    $this->bd->cerrarConexion();
-
 	    //Crear sesión con los datos de registro creados
 	    session_start();
 	    $_SESSION['id'] = $id['idUsuario'];
 
-	    //Redireccionar a preferencias.php
-	    header('Location:preferencias.php');
+	    //Insertar las preferencias del usuario
+	    $this->enviarPreferencias($datos['minijuegos'], $id['idUsuario']);
+
+	}
+
+	function iniciarSesion($datos){
+
+	    //Consulta SQL
+	    $sql = 'SELECT idUsuario FROM usuario WHERE correo = "'.$datos['correo'].'" AND password = "'.$datos['password'].'"';
+
+	    //Enviar la consulta
+	    $this->bd->consultar($sql);
+
+	    //Comprobar si ha habido error
+	    if($this->bd->codigoError())
+		return;
+
+	    //Obtener el resultado de la consulta
+	    $resultado = $this->bd->extraerFila();
+
+	    //Crear sesión con el id del usuario
+	    session_start();
+	    $_SESSION['id'] = $resultado['idUsuario'];
+
+	    //Redirigir a index.php
+	    header('Location:index.php');
 
 	}
 
@@ -82,7 +103,7 @@
 	    $sql = 'INSERT INTO preferencia VALUES ';
 
 	    //Concatenarle a la consulta las preferencias elegidas por el usuario
-	    foreach ($datos['minijuegos'] as $preferencia) {
+	    foreach ($datos as $preferencia) {
 	    	$sql = $sql.'('.$id.', '.$preferencia.'), ';
 	    }
 
@@ -94,6 +115,9 @@
 
 	    //Cerrar conexión
 	    $this->bd->cerrarConexion();
+
+	    //Redireccionar a index.php
+	    header('Location:index.php');
 
 	}
 
@@ -113,6 +137,25 @@
 		    echo 'Ha ocurrido un error inesperado';
 	   	    break;
 	   } 
+
+	}
+
+	function nombreUsuario($id){
+
+	    //Consulta SQL
+	    $sql = 'SELECT nombreUsuario FROM usuario WHERE idUsuario = '.$id.'';
+
+	    //Enviar la consulta
+	    $this->bd->consultar($sql);
+
+	    //Obtener resultado
+	    $resultado = $this->bd->extraerFila();
+	    
+	    //Cerrar conexión
+	    $this->bd->cerrarConexion();
+
+	    //Devolver resultado
+	    return $resultado['nombreUsuario'];
 
 	}
 

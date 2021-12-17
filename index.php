@@ -3,7 +3,7 @@
     //Comprobar si hay una sesión activa
     session_start();
     if(!isset($_SESSION['id']))
-	header('Location:inicio.php');
+	header('Location:registro.php');
 
     //IMPORTACIONES
     require_once 'clases/operaciones.php';

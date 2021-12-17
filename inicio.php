@@ -34,7 +34,6 @@
 		<input type="password" name="password" placeholder="Contraseña" />
 		<!-- ENVIAR -->
 		<input type="submit" name="enviar" value="INICIAR" />
-		<p>¿No tienes cuenta? <a href="registro.php">Registrarse</a>.</p>
 	    </form>
 	</main>
     </body>
